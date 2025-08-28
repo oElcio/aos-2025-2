@@ -9,7 +9,27 @@ console.log("PYTHON_ROOT", process.env.PYTHON_ROOT);
 
 const app = express();
 
-const quotes = [
+app.use(cors());
+app.use((req, res, next) => {
+  console.log('${req.method} ${req.path} - ${req.ip}');
+  next();
+});
+app.get("/", (req, res) => {
+  res.send("Bem-vindo ao Express de Elcio josé!");
+});
+
+app.get('/', (req, res) => {
+  return res.send('Received a GET HTTP method');
+});
+
+app.get("/random", (req, res) => {
+  const randomNumber = Math.floor(Math.random() * 100000);
+  res.send({ randomNumber });
+});
+
+app.get("/inspiration", (req, res) => {
+  const numberRandom = Math.floor(Math.random() * 14);
+    const FrasesMotivacionais = [
     "O sucesso é a soma de pequenos esforços repetidos dia após dia.",
     "Acredite em você e todo o resto virá naturalmente.",
     "Não espere por oportunidades, crie-as.",
@@ -26,29 +46,7 @@ const quotes = [
     "A maior glória em viver não está em nunca cair, mas em levantar-se a cada queda.",
     "Não conte os dias, faça os dias contarem."
 ];
-
-app.use(cors());
-app.use((req, res, next) => {
-  console.log('${req.method} ${req.path} - ${req.ip}');
-  next();
-});
-app.get("/", (req, res) => {
-  res.send("Bem-vindo ao Express de Elcio josé!");
-});
-
-app.get('/', (req, res) => {
-  return res.send('Received a GET HTTP method');
-});
-
-app.get('/random', (req, res) => {
-  const randomNumber = Math.floor(Math.random() * 100000);
-  res.json({ randomNumber });
-});
-
-app.get('inspiration', (req, res) => {
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-    const randomQuote = quotes[randomIndex];
-    res.json({ quote: randomQuote });
+    res.send({ quotes: FrasesMotivacionais[numberRandom] });
 });
 
 app.post('/', (req, res) => {
@@ -66,10 +64,6 @@ app.listen(3000, () =>
   console.log('Example app listening on port 3000!'),
 );
 
-app.listen(3000, () =>
-   console.log(`Servidor rodando em http://localhost:${3000}`),
+app.listen(3000, () =>  
+  console.log('Example app listening on port 3000!'),
 );
-
-app.listen(3000, () => {
-    console.log(`Servidor rodando em http://localhost:${3000}`);
-});
