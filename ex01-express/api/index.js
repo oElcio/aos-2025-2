@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
   res.send("Bem-vindo ao Express de Elcio josé!");
 });
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   return res.send('Received a GET HTTP method');
 });
 
@@ -49,21 +49,17 @@ app.get("/inspiration", (req, res) => {
     res.send({ quotes: FrasesMotivacionais[numberRandom] });
 });
 
-app.post('/', (req, res) => {
+app.post("/", (req, res) => {
   return res.send('Received a POST HTTP method');
 });
 
-app.put('/', (req, res) => {
+app.put("/", (req, res) => {
   return res.send('Received a PUT HTTP method');
 });
 
-app.delete('/', (req, res) => {
+app.delete("/", (req, res) => {
   return res.send('Received a DELETE HTTP method');
 });
-app.listen(3000, () =>  
-  console.log('Example app listening on port 3000!'),
-);
-
 app.listen(3000, () =>  
   console.log('Example app listening on port 3000!'),
 );
